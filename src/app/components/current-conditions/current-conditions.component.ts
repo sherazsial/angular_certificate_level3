@@ -1,5 +1,4 @@
 import { Component, computed, inject, Signal } from "@angular/core";
-import { Router } from "@angular/router";
 import { ConditionsAndZip } from "../../types/conditions-and-zip.type";
 import { WeatherService } from "../../services/weather.service";
 import { LocationService } from "../../services/location.service";
@@ -21,5 +20,4 @@ export class CurrentConditionsComponent {
         <Tab>{ title: `${conditions.data.name} (${conditions.zip})` },
     );
   });
-  private router = inject(Router);
 }

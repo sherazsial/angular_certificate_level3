@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, signal } from "@angular/core";
-import { NgForOf, NgIf } from "@angular/common";
 
 export interface Tab {
   title: string;
@@ -7,17 +6,14 @@ export interface Tab {
 
 @Component({
   selector: "app-tab-group",
-  imports: [NgForOf, NgIf],
   template: ` <div class="tabs">
     <ul class="tab-titles">
-      <li
-        *ngFor="let tab of tabs; let i = index"
-        [class.active]="i === selectedIndex()"
-        (click)="selectTab(i)"
-      >
-        {{ tab.title }}
-        <button class="close-btn" (click)="closeTab(i)">X</button>
-      </li>
+      @for (tab of tabs; track i; let i = $index) {
+        <li [class.active]="i === selectedIndex()" (click)="selectTab(i)">
+          {{ tab.title }}
+          <button class="close-btn" (click)="closeTab(i)">X</button>
+        </li>
+      }
     </ul>
     <div class="tab-content">
       <ng-content />

@@ -1,22 +1,27 @@
-<app-tab-group #tabGroupComponent (closeEmitter)="locationService.removeLocation($event)"
-               [tabs]="tabs()">
-    <div *ngIf="currentConditionsByZip()[tabGroupComponent.selectedIndex()] as location" class="tab-content">
-        <div class="current-condition">
-            <div class="info-content">
-                <h4>Current conditions: {{ location.data.weather[0].main }}</h4>
-                <h4>Temperatures today:</h4>
-                <p>
-                    Current {{ location.data.main.temp | number:'.0-0' }}
-                    - Max {{ location.data.main.temp_max | number:'.0-0' }}
-                    - Min {{ location.data.main.temp_min | number:'.0-0' }}
-                </p>
-                <p>
-                    <a [routerLink]="['/forecast', location.zip]">Show 5-day forecast for {{ location.data.name }}</a>
-                </p>
-            </div>
-            <img [src]="weatherService.getWeatherIcon(location.data.weather[0].id)">
-        </div>
+@if (tabs().length > 0) {
+    <app-tab-group #tabGroupComponent (closeEmitter)="locationService.removeLocation($event)"
+                   [tabs]="tabs()">
+        @if (currentConditionsByZip()[tabGroupComponent.selectedIndex()]; as location) {
+            <div class="tab-content">
+                <div class="current-condition">
+                    <div class="info-content">
+                        <h4>Current conditions: {{ location.data.weather[0].main }}</h4>
+                        <h4>Temperatures today:</h4>
+                        <p>
+                            Current {{ location.data.main.temp | number:'.0-0' }}
+                            - Max {{ location.data.main.temp_max | number:'.0-0' }}
+                            - Min {{ location.data.main.temp_min | number:'.0-0' }}
+                        </p>
+                        <p>
+                            <a [routerLink]="['/forecast', location.zip]">Show 5-day forecast
+                                for {{ location.data.name }}</a>
+                        </p>
+                    </div>
+                    <img [src]="weatherService.getWeatherIcon(location.data.weather[0].id)">
+                </div>
 
-    </div>
-</app-tab-group>
+            </div>
+        }
+    </app-tab-group>
+}
 
