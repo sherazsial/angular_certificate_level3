@@ -1,0 +1,52 @@
+.close {
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.current-condition {
+    padding: 15px;
+    background: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 0 5px 5px 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.current-condition h4 {
+    margin: 0 0 10px;
+    font-weight: normal;
+}
+
+.current-condition p {
+    margin: 5px 0;
+}
+
+.current-condition a {
+    color: #2a77c3;
+    text-decoration: underline;
+    font-size: 0.9em;
+}
+
+
+.close {
+    cursor: pointer;
+    font-size: 20px;
+    color: #ff0000;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.tab-content {
+    display: flex;
+    justify-content: center;
+}
+
+.info-content {
+    align-content: center;
+}
