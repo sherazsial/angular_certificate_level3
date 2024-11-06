@@ -1,7 +1,17 @@
-import { Component, EventEmitter, Input, Output, signal } from "@angular/core";
+import {
+  Component,
+  ContentChild,
+  EventEmitter,
+  Input,
+  Output,
+  signal,
+  TemplateRef,
+} from "@angular/core";
+import { NgTemplateOutlet } from "@angular/common";
 
 export interface Tab {
   title: string;
+  content: any;
 }
 
 @Component({
@@ -16,7 +26,14 @@ export interface Tab {
       }
     </ul>
     <div class="tab-content">
-      <ng-content />
+      @if (selectedIndex() !== null && tabs[selectedIndex()].content) {
+        <ng-container
+          [ngTemplateOutlet]="tabContent"
+          [ngTemplateOutletContext]="{
+            $implicit: tabs[selectedIndex()].content,
+          }"
+        />
+      }
     </div>
   </div>`,
   standalone: true,
@@ -61,10 +78,12 @@ export interface Tab {
       border-width: 1px;
     }
   `,
+  imports: [NgTemplateOutlet],
 })
 export class TabGroupComponent {
   @Input() tabs: Tab[] = [];
   @Output() closeEmitter: EventEmitter<number> = new EventEmitter<number>();
+  @ContentChild("tabContent", { static: false }) tabContent!: TemplateRef<any>;
 
   selectedIndex = signal(0);
 

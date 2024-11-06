@@ -17,7 +17,10 @@ export class CurrentConditionsComponent {
   tabs = computed(() => {
     return this.currentConditionsByZip().map(
       (conditions) =>
-        <Tab>{ title: `${conditions.data.name} (${conditions.zip})` },
+        <Tab>{
+          title: `${conditions.data.name} (${conditions.zip})`,
+          content: conditions,
+        },
     );
   });
 }
